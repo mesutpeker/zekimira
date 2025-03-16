@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/performans/(.*)", "destination": "https://performans-projem.vercel.app/$1" },
+    { "source": "/diger-proje/(.*)", "destination": "https://diger-projem.vercel.app/$1" }
+  ]
+}
