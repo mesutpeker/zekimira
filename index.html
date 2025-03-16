@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Eldeli Çarpma Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Arka plan müziği -->
+    <audio id="backgroundMusic" loop>
+        <source src="background.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Ses kontrol butonu -->
+    <button id="soundToggle" class="sound-toggle">
+        <span class="sound-on">🔊</span>
+        <span class="sound-off hidden">🔇</span>
+    </button>
+    
+    <div class="container">
+        <h1>Eldeli Çarpma Oyunu</h1>
+        <p class="instruction">İki basamaklı sayı ile bir basamaklı sayının çarpımını öğrenelim!</p>
+        
+        <div class="game-board">
+            <!-- Karakterimiz -->
+            <div id="character" class="character">
+                <div class="character-image"></div>
+                <div id="characterSpeech" class="speech-bubble">
+                    Çarpma yapmaya hazır mısın?
+                </div>
+            </div>
+            
+            <!-- Çarpma problemi gösterimi -->
+            <div class="multiplication-problem">
+                <div class="number two-digit">
+                    <span id="tensDigit" class="digit">4</span>
+                    <span id="onesDigit" class="digit">5</span>
+                </div>
+                <div class="operation">
+                    <span>×</span>
+                </div>
+                <div class="number one-digit">
+                    <span id="multiplier" class="digit">7</span>
+                </div>
+            </div>
+            
+            <!-- Sonuç kutucukları -->
+            <div class="result-containers">
+                <!-- Sonuç kutucukları (üstten ilk yüzler, ortada onlar, sağda birler) -->
+                <div class="result-boxes">
+                    <div class="result-label">Yüzler</div>
+                    <div class="result-label">Onlar</div>
+                    <div class="result-label">Birler</div>
+                </div>
+                <div class="result-boxes">
+                    <div id="hundredsBox" class="result-box">
+                        <span class="result-placeholder">?</span>
+                    </div>
+                    <div id="tensBox" class="result-box">
+                        <span class="result-placeholder">?</span>
+                    </div>
+                    <div id="onesBox" class="result-box">
+                        <span class="result-placeholder">?</span>
+                    </div>
+                </div>
+                
+                <!-- Giriş alanı -->
+                <div class="input-area">
+                    <div class="steps-info">
+                        <p id="currentStep" class="current-step-title">Birler basamağını çarp: <span id="currentMultiplication" class="highlight">5 × 7 = ?</span></p>
+                    </div>
+                    
+                    <!-- Çoktan seçmeli cevaplar -->
+                    <div id="multipleChoiceContainer" class="multiple-choice-container">
+                        <button class="choice-btn" data-value="0">0</button>
+                        <button class="choice-btn" data-value="0">0</button>
+                        <button class="choice-btn" data-value="0">0</button>
+                    </div>
+                    
+                    <!-- Tek cevaplı giriş -->
+                    <div id="singleInputContainer" class="input-container hidden">
+                        <input type="number" id="answerInput" class="answer-input" placeholder="Sonucu gir">
+                        <button id="checkBtn" class="btn check-btn">Kontrol Et</button>
+                    </div>
+                    
+                    <!-- Elde seçim bölümü -->
+                    <div id="carryQuestionContainer" class="carry-question-container hidden">
+                        <p>Elde var mı?</p>
+                        <div class="carry-buttons">
+                            <button id="carryYesBtn" class="btn carry-btn yes-btn">
+                                <span class="btn-icon">✓</span> Var
+                            </button>
+                            <button id="carryNoBtn" class="btn carry-btn no-btn">
+                                <span class="btn-icon">✗</span> Yok
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Elde giriş bölümü -->
+                    <div id="carryContainer" class="carry-container hidden">
+                        <p>Elde kaç?</p>
+                        <div class="carry-options">
+                            <button class="carry-option-btn" data-value="1">1</button>
+                            <button class="carry-option-btn" data-value="2">2</button>
+                            <button class="carry-option-btn" data-value="3">3</button>
+                            <button class="carry-option-btn" data-value="4">4</button>
+                            <button class="carry-option-btn" data-value="5">5</button>
+                            <button class="carry-option-btn" data-value="6">6</button>
+                            <button class="carry-option-btn" data-value="7">7</button>
+                            <button class="carry-option-btn" data-value="8">8</button>
+                            <button class="carry-option-btn" data-value="9">9</button>
+                        </div>
+                    </div>
+                    
+                    <p id="feedback" class="feedback"></p>
+                </div>
+            </div>
+            
+            <!-- Animasyon ve kutlama alanı -->
+            <div id="animationArea" class="animation-area"></div>
+            
+            <!-- Yeni soru butonu -->
+            <button id="newProblemBtn" class="btn new-btn">Yeni Soru</button>
+            
+            <!-- Kutlama efekti -->
+            <div id="celebration" class="celebration hidden">
+                <div id="confetti" class="confetti-container"></div>
+                <p class="congrats-message">Tebrikler! Doğru cevap!</p>
+                <div class="star-container">
+                    <div class="star">⭐</div>
+                    <div class="star">⭐</div>
+                    <div class="star">⭐</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
